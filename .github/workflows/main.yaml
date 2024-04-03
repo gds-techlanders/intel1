@@ -43,7 +43,6 @@ jobs:
       lastname: "singh"
     steps: 
      - name: step1
-       continue-on-error: true
        run: |
           echo "$greetings ! from $name $lastname. $name created this file"
           ech " ${{ vars.APP_NAME }} is hosted on ${{ vars.SERVER_NAME }} "
@@ -84,4 +83,11 @@ jobs:
           hostname
           echo "$greetings ! from $name"
           touch /tmp/gagandeep1
-        
+  notify:
+    runs-on: ubuntu-latest
+    environment: prod
+    needs: deploy
+    if: ${{ always() }}
+    steps: 
+     - name: Notification email
+       run: echo build run status        
