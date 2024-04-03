@@ -12,7 +12,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-   
+    needs: deploy
     environment: dev
     env:
       greetings: "hello"
@@ -64,7 +64,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: prod
-    needs: test
+    needs: stage
     env:
       lastname: "singh"
     steps: 
