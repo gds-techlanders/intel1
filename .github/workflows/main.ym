@@ -7,7 +7,7 @@ on:
 env:
    greetings: "Good Morning"
    name: "Mark"
-   lastname: "Jack"
+   lastname: "Jack1"
 
 jobs:
   build:
