@@ -51,10 +51,11 @@ jobs:
           eco " ${{ vars.APP_NAME }} is hosted on ${{ vars.SERVER_NAME }} "
           sleep 2 
      - name: step2
+       id: step2
        run: |
           echo step2 
      - name: debug step
-       if: ${{ failure() }} 
+       if: ${{ failure() && steps.step2.conclusion == 'failure' }} 
        run: |
           echo Debugging steps          
   stage:
