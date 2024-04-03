@@ -48,7 +48,7 @@ jobs:
        id: step1
        run: |
           echo "$greetings ! from $name $lastname. $name created this file"
-          ech " ${{ vars.APP_NAME }} is hosted on ${{ vars.SERVER_NAME }} "
+          echo " ${{ vars.APP_NAME }} is hosted on ${{ vars.SERVER_NAME }} "
           sleep 2 
      - name: step2
        run: |
