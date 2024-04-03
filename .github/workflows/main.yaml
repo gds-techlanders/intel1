@@ -37,7 +37,7 @@ jobs:
       - run: uname -a
   test:
     runs-on: ubuntu-latest
-    continue-on-error: true
+    #continue-on-error: true
     environment: prod
     needs: build
     env:
@@ -47,11 +47,14 @@ jobs:
        run: |
           echo "$greetings ! from $name $lastname. $name created this file"
           ech " ${{ vars.APP_NAME }} is hosted on ${{ vars.SERVER_NAME }} "
-          sleep 10      
+          sleep 10  
+     - name: step2
+       run: |
+          echo "$greetings ! from $name $lastname. $name created this file"
   stage:
     runs-on: ubuntu-latest
     environment: prod
-    needs: deploy
+    needs: test
     env:
       lastname: "singh"
     steps: 
