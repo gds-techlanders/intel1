@@ -53,6 +53,7 @@ jobs:
   stage:
     runs-on: ubuntu-latest
     environment: prod
+    if: ${{ always() }}
     needs: test
     env:
       lastname: "singh"
@@ -87,7 +88,6 @@ jobs:
     runs-on: ubuntu-latest
     environment: prod
     needs: deploy
-    if: ${{ always() }}
     steps: 
      - name: Notification email
        run: echo build run status        
