@@ -51,10 +51,10 @@ jobs:
           ech " ${{ vars.APP_NAME }} is hosted on ${{ vars.SERVER_NAME }} "
           sleep 2 
      - name: step2
-       if: ${{ steps.step1.conclusion == 'failure' }} 
        run: |
           echo step1 failed
      - name: step3
+       if: ${{ failure() }} 
        run: |
           echo step3          
   stage:
