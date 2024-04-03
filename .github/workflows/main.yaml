@@ -4,6 +4,7 @@ name: workflow1
 on: 
   workflow_dispatch:
   push:
+   branches: main
   pull_request:
 env:
    greetings: "Good Morning"
@@ -44,19 +45,18 @@ jobs:
     env:
       lastname: "singh"
     steps: 
-     - name: step1
-       id: step1
+     - name: this is my step1
        run: |
           echo "$greetings ! from $name $lastname. $name created this file"
           echo " ${{ vars.APP_NAME }} is hosted on ${{ vars.SERVER_NAME }} "
           sleep 2 
      - name: step2
        run: |
-          echo step1 failed
-     - name: step3
+          echo step2 
+     - name: debug step
        if: ${{ failure() }} 
        run: |
-          echo step3          
+          echo Debugging steps          
   stage:
     runs-on: ubuntu-latest
     environment: prod
