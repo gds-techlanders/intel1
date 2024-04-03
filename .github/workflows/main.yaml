@@ -22,7 +22,7 @@ jobs:
           echo "$greetings ! from $name . $name created this file under repo ${{ GITHUB.REPOSITORY }} and its running on OS ${{ RUNNER.OS }}"
           echo Application name is ${{ vars.APP_NAME }} and password for the same is ${{ secrets.SERVER_PASSWORD }}
           echo " ${{ vars.APP_NAME }} is hosted on ${{ vars.SERVER_NAME }} "
-          sleep 5
+          sleep 2
         env:
           name: Gagandeep
           greetings: "hi"
@@ -30,7 +30,7 @@ jobs:
         if: github.event_name == 'push'
         run: |
           cat /etc/os-release
-          sleep 5
+          sleep 2
           hostname
           echo "$greetings ! from $name"
           touch /tmp/gagandeep1
@@ -39,7 +39,6 @@ jobs:
       - run: uname -a
   test:
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
     environment: prod
     needs: build
     env:
@@ -49,10 +48,14 @@ jobs:
        run: |
           echo "$greetings ! from $name $lastname. $name created this file"
           ech " ${{ vars.APP_NAME }} is hosted on ${{ vars.SERVER_NAME }} "
-          sleep 10  
+          sleep 2 
      - name: step2
+       if: ${{ steps.step1.conclusion == 'failure' }} 
        run: |
-          echo "$greetings ! from $name $lastname. $name created this file"
+          echo step1 failed
+     - name: step3
+       run: |
+          echo step3          
   stage:
     runs-on: ubuntu-latest
     environment: prod
